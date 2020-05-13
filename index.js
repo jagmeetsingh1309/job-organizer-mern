@@ -5,7 +5,6 @@ const path = require('path');
 
 const authRoutes = require('./routes/authRoutes');
 const jobRoutes = require('./routes/jobRoutes');
-const config = require('./production');
 
 const app = express();
 
