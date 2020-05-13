@@ -24,14 +24,18 @@ app.use( (error,req,res,next) => {
     return res.status(error.statusCode).json(error);
 });
 
-app.use(express.static(path.join(__dirname, "client/build")));
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'))
+}
 
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-});
+// app.use(express.static(path.join(__dirname, "client/build")));
+
+// app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+// });
 
 mongoose
-    .connect(config.MONGO_URL)
+    .connect(process.env.MONGO_DB_URI || config.MONGO_URL)
     .then( () => app.listen(process.env.PORT || 8000))
     .catch(err => console.log(err));
 
