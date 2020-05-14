@@ -30,11 +30,8 @@ if(process.env.NODE_ENV === 'production'){
     });
 }
 
-// app.use(express.static(path.join(__dirname, "client/build")));
-
-
 mongoose
-    .connect(process.env.MONGODB_URI )
+    .connect(process.env.MONGODB_URI)
     .then( () => app.listen(process.env.PORT || 8000))
     .catch(err => console.log(err));
 
