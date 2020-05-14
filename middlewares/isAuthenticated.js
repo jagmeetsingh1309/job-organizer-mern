@@ -1,24 +1,24 @@
 const jwt = require('jsonwebtoken');
 
-const config = require('../config');
-
 module.exports = (req,res,next) => {
     const authHeader = req.get('Authorization');
     let decodedToken;
     if(authHeader){
         const token = authHeader.split(' ')[1];
         try{
-            decodedToken = jwt.verify(token, config.JWT_TOKEN);
+            decodedToken = jwt.verify(token, 'mysecret123456789');
         } catch(err){
-            const error = new Error('Token does not match');
+            const error = new Error();
             error.statusCode = 401;
+            error.message = 'Token does not match';
             throw error;
         }
         req.userId = decodedToken.userId;
         next();
     } else {
-        const error = new Error('No Token given.');
+        const error = new Error();
         error.statusCode = 401;
+        error.message = 'No Token given.';
         throw error;
     }
 }

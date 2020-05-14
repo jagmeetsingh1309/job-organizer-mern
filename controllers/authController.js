@@ -2,7 +2,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
-const config = require('../config');
 
 exports.postSignup = (req,res,next) => {
     const email = req.body.email;
@@ -63,7 +62,7 @@ exports.postLogin = (req,res,next) => {
                 userId: loadedUser._id.toString(),
                 email: loadedUser.email
             }
-            const token = jwt.sign(payload,config.JWT_SECRET);
+            const token = jwt.sign(payload,'mysecret123456789');
             return res.status(200).json({
                 userId: loadedUser._id.toString(),
                 token: token,
