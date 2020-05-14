@@ -18,7 +18,7 @@ export const loginUser = (data,history) => {
                     'Content-Type': 'application/json'
                 }
             }
-            const response = await axios.post('http://localhost:8000/login',body,config);
+            const response = await axios.post('/login',body,config);
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: response.data
@@ -49,7 +49,7 @@ export const signupUser = (data,history) => {
                     'Content-Type': 'application/json'
                 }
             };
-            const response = await axios.post('http://localhost:8000/register',body,config);
+            const response = await axios.post('/register',body,config);
             dispatch({
                 type: SIGNUP_SUCCESS,
                 payload: response.data

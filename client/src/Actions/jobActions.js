@@ -18,7 +18,7 @@ export const getJobs = () => {
                 'Authorization': 'Bearer ' + token 
             }
         }
-        const response = await axios.get('http://localhost:8000/jobs',config);
+        const response = await axios.get('/jobs',config);
         dispatch({
             type: GET_JOBS,
             payload: response.data.jobs
@@ -47,7 +47,7 @@ export const addJob = (job) => {
                 'Content-Type': 'application/json'
             }
         }
-        const response = await axios.post('http://localhost:8000/add-job',body,config);
+        const response = await axios.post('/add-job',body,config);
         dispatch({
             type: ADD_JOB,
             payload: response.data
@@ -63,7 +63,7 @@ export const getJob = (jobId) => {
                 'Authorization': 'Bearer ' + token
             }
         }
-        const response = await axios.get(`http://localhost:8000/job/${jobId}`,config);
+        const response = await axios.get(`/job/${jobId}`,config);
         let formatedAppliedOn = moment(response.data.job.appliedOn).format('YYYY-MM-DD');
         dispatch({
             type: GET_JOB,
@@ -85,7 +85,7 @@ export const editJob = (job) => {
                 'Content-Type': 'application/json'
             }
         }
-        const response = await axios.put(`http://localhost:8000/job/${job._id}/edit`,body,config);
+        const response = await axios.put(`/job/${job._id}/edit`,body,config);
         let formatedAppliedOn = moment(response.data.job.appliedOn).format('YYYY-MM-DD');
         dispatch({
             type: EDIT_JOB,
